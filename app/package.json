@@ -1,0 +1,24 @@
+{
+  "name": "ecmaniac",
+  "version": "1.0.0",
+  "description": "js code challenge app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd ui && npm install && npm run build",
+    "build:backend": "cd api && npm install",
+    "start:backend": "cd api && npm start",
+    "start:frontend": "cd ui && npm run dev",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://damirmilk@dev.azure.com/damirmilk/ecmaniac/_git/main"
+  },
+  "keywords": [],
+  "author": "Damir Miljkovic",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
