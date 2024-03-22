@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerOptions from './src/swagger/swaggerConfig.js';
 import getUserRouter from "./src/routes/usersRoute.js";
+import getChallengeRouter from "./src/routes/challengesRoute.js";
 import getAuthRouter from "./src/routes/authRoute.js";
 import { setup } from "./dependencyInjectionConfig.js";
 
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 
 app.use("/user", getUserRouter());
 app.use("/auth", getAuthRouter());
+app.use("/challenge", getChallengeRouter());
 
 // Global Error Handler
 app.use((error, req, res, next) => {
