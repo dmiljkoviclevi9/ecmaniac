@@ -1,7 +1,7 @@
-[![ecmaniac api](https://nodejs.org/static/images/logo.svg)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/api)
-[![ecmaniac api](https://expressjs.com/images/express-facebook-share.png)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/api)
-[![ecmaniac ui](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/ui)
-[![ecmaniac ui](https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/ui)
+[![node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/api)
+[![express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/api)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/ui)
+[![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://github.com/dmiljkoviclevi9/ecmaniac/tree/main/app/ui)
 
 
 # ECMAScript coding challenge app
