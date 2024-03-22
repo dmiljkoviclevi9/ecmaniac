@@ -11,6 +11,14 @@ export default class ChallengeService {
         }
     };
 
+    patchChallenge = async (challengeData) => {
+        try {
+            return await this.challengeRepository.patchChallenge(challengeData);
+        } catch (err) {
+            throw err;
+        }
+    };
+
     updateChallenge = async (challengeData) => {
         try {
             return await this.challengeRepository.updateChallenge(challengeData);
