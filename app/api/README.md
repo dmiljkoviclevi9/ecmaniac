@@ -1,1 +1,1 @@
-![API diagram](app\api\image.png)
+![API diagram](./image.png)
