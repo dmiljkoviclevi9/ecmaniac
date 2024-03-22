@@ -18,9 +18,6 @@
 *        password:
 *          type: string
 *          description: The password of the user. Must be a strong password.
-*        isVerified:
-*          type: boolean
-*          description: The status of the user.
 *        role:
 *          type: string
 *          description: The role assigned to the user. Must be one of 'USER', 'ADMIN'.
@@ -36,7 +33,6 @@
 *    userName: johndoe
 *    email: johndoe@example.com
 *    password: password
-*    isVerified: FALSE
 *    role: USER
 *    tokens: [{token: 'token'}]
 */
@@ -44,10 +40,14 @@
 
 /**
  * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management
+ * 
  * /user:
  *   post:
  *     summary: Create a new user.
- *     tags: [user]
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -58,7 +58,6 @@
  *             userName: "Jane Doe"
  *             email: "jane.doe@example.mail"
  *             password: "Password1?"
- *             isVerified: false
  *             role: "USER"
  *             tokens: 
  *               - token: "string"
@@ -70,10 +69,26 @@
  *     operationId: create
  *
  *   get:
- *     summary: Get all users.
- *     tags: [user]
+ *     summary: Get all users with optional pagination and filtering.
+ *     tags: [Users]
  *     security:
  *       - BearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: pageNum
+ *         schema:
+ *           type: integer
+ *         description: Page number
+ *       - in: query
+ *         name: perPage
+ *         schema:
+ *           type: integer
+ *         description: Number of users per page
+ *       - in: query
+ *         name: difficulty
+ *         schema:
+ *           type: string
+ *         description: Filter users by difficulty
  *     responses:
  *       200:
  *         description: List of users.
@@ -87,7 +102,7 @@
 * /user/{id}:
 *   patch:
 *     summary: Update a user partially.
-*     tags: [user]
+*     tags: [Users]
 *     security:
 *       - BearerAuth: []
 *     parameters:
@@ -118,7 +133,7 @@
 *     operationId: patch
 *   put:
 *     summary: Update a user completely.
-*     tags: [user]
+*     tags: [Users]
 *     security:
 *       - BearerAuth: []
 *     parameters:
@@ -142,7 +157,7 @@
 *     operationId: put
 *   delete:
 *     summary: Delete a user.
-*     tags: [user]
+*     tags: [Users]
 *     security:
 *       - BearerAuth: []
 *     parameters:
@@ -161,7 +176,7 @@
 *
 *   get:
 *     summary: Get a user by ID.
-*     tags: [user]
+*     tags: [Users]
 *     security:
 *       - BearerAuth: []
 *     parameters:
@@ -186,7 +201,7 @@
  * /user/verify:
  *   get:
  *     summary: Verify a user's email address.
- *     tags: [verify user]
+ *     tags: [Users]
  *     parameters:
  *       - in: query
  *         name: token

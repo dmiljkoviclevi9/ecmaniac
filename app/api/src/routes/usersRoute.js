@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { auth } from "../middleware/auth.js";
+import { requireAdmin, auth } from "../middleware/auth.js";
 import { container } from "../../dependencyInjectionConfig.js";
 
 
@@ -20,7 +20,7 @@ const getUserRouter = () => {
     usersRouter.route('/:id')
         .patch(auth, userController.patchUser)
         .put(auth, userController.updateUser)
-        .delete(auth, userController.deleteUser)
+        .delete(auth, requireAdmin, userController.deleteUser)
         .get(auth, userController.getUser);
 
     return usersRouter;

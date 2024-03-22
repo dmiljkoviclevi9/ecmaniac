@@ -8,14 +8,14 @@ export default class UserController {
   }
 
   createUser = async (req, res, next) => {
-    const { userName, email, password, isVerified, role } = req.body;
+    const { userName, email, password, role } = req.body;
 
     try {
       const { user, token } = await this.userService.createUser({
         userName,
         email,
         password,
-        isVerified,
+        isVerified: false,
         role,
       });
       
@@ -102,8 +102,7 @@ export default class UserController {
       const { user } = await this.userService.deleteUser(userId);
 
       res.status(200).json({
-        message: "User deleted successfully!",
-        // user: user,
+        message: `User ${user.userName} deleted successfully!`,
       });
     } catch (err) {
       next(err);
