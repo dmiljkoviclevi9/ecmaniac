@@ -1,82 +1,36 @@
 import { Router } from 'express';
-import { requireAdmin } from '../middleware/auth.js';
-import { body } from "express-validator";
-import { auth } from "../middleware/auth.js";
-import { container } from "../dependencyInjectionConfig.js";
+import { validationResult } from 'express-validator';
+import { requireAdmin, auth } from '../middleware/auth.js';
+import { container } from "../../dependencyInjectionConfig.js";
+import * as validate from "../validations/challengeValidations.js";
 
 
 const getChallengeRouter = () => {
-    const challengeController = container.resolve("challengeController");
-    const challengeRouter = Router();
 
-// create challenge
-challengeRouter.post('/challenge/create', [
-    body("title")
-      .notEmpty()
-      .trim()
-      .isLength({ min: 3 })
-      .withMessage("Title must be at least 3 chars long."),
-    body("description")
-      .notEmpty()
-      .trim()
-      .isLength({ max: 30 })
-      .withMessage("Description must be less then 30 chars long."),
-    body("difficulty")
-      .notEmpty()
-      .withMessage("Difficulty is required."),
-    body("category")
-      .notEmpty()
-      .withMessage("Category is required."),
-    body("creator")
-      .notEmpty()
-      .withMessage("Creator is required."),
-    body("tests")
-      .notEmpty()
-      .withMessage("Tests are required."),
-  ],
-  auth,
-  challengeController.createChallenge
-);
+  const challengeController = container.resolve("challengeController");
+  const challengeRouter = Router();
 
-// update challenge
-challengeRouter.put('/challenge/:id/update', [
-    body("title")
-      .notEmpty()
-      .trim()
-      .isLength({ min: 3 })
-      .withMessage("Title must be at least 3 chars long."),
-    body("description")
-      .notEmpty()
-      .trim()
-      .isLength({ max: 30 })
-      .withMessage("Description must be less then 30 chars long."),
-    body("difficulty")
-      .notEmpty()
-      .withMessage("Difficulty is required."),
-    body("category")
-      .notEmpty()
-      .withMessage("Category is required."),
-    body("creator")
-      .notEmpty()
-      .withMessage("Creator is required."),
-    body("tests")
-      .notEmpty()
-      .withMessage("Tests are required."),
-  ],
-  auth,
-  challengeController.updateChallenge
-);
+  // create challenge
+  challengeRouter.route('/')
+    .post([...validate.challengeValidationFull], auth, (req, res, next) => {
+      // Check for validation errors
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
-// delete challenge
-challengeRouter.delete('/challenge/:id/delete', auth, requireAdmin, challengeController.deleteChallenge);
+      // Proceed with creating the challenge if no errors
+      challengeController.createChallenge(req, res, next);
+    })
+    .get(auth, challengeController.getChallenges)
 
-// get specific challenge
-challengeRouter.get('/challenge/:id/get', auth, challengeController.getChallenge);
+  challengeRouter.route('/:id')
+    .patch([...validate.challengeValidationOptional], auth, challengeController.updateChallenge)
+    .put([...validate.challengeValidationOptional], auth, challengeController.updateChallenge)
+    .delete(auth, requireAdmin, challengeController.deleteChallenge)
+    .get(auth, challengeController.getChallenge);
 
-// get all challenges
-challengeRouter.get('/challenge/getAll', auth, challengeController.getAllChallenges);
-
-return challengeRouter;
+  return challengeRouter;
 };
 
 export default getChallengeRouter;
