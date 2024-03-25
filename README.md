@@ -23,4 +23,4 @@ Challenges are categorized into:
 
 Each challenge also has a difficulty which is either Easy, Medium or Hard.
 
-Clicking on any of the categories will open a random challenge from that category. Each challenge also contains a set of test cases(minimum one) needed to pass for a successful solution.
+Clicking on any of the categories will open a random challenge from that category. Each challenge also contains a set of test cases (minimum one) needed to pass for a successful solution.
