@@ -33,7 +33,7 @@ const challengeSchema = new Schema({
   category: {
     type: String,
     required: true,
-    enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'DATES', 'SETS', 'MAPS', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS']
+    enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'SETS', 'MAPS', 'DATES', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS', 'PROMISES']
   },
   creator: {
     type: Schema.Types.ObjectId,

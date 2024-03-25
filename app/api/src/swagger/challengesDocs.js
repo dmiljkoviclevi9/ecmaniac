@@ -73,6 +73,31 @@
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/ChallengeUpdate'
+ *           examples:
+ *            change title:
+ *              value:
+ *               title: "New Title"
+ *            change description:
+ *               value:
+ *                description: "New Description"
+ *            change difficulty:
+ *               value:
+ *                difficulty: "MEDIUM"
+ *            change category:
+ *               value:
+ *                category: "ARRAYS"
+ *            change tests:
+ *               value:
+ *                tests: [
+ *                 {
+ *                 input: ["a", "b", "c"],
+ *                 expectedOutput: ["c", "b", "a"]
+ *                 },
+ *                 {
+ *                 input: [1, 2, 3],
+ *                 expectedOutput: [3, 2, 1]
+ *                 }
+ *                 ]
  *     responses:
  *       200:
  *         description: Challenge updated successfully
@@ -188,7 +213,7 @@
  *           enum: ['EASY', 'MEDIUM', 'HARD']
  *         category:
  *           type: string
- *           enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'DATES', 'SETS', 'MAPS', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS']
+ *           enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'SETS', 'MAPS', 'DATES', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS', 'PROMISES']
  *         tests:
  *           type: array
  *           items:
@@ -205,7 +230,7 @@
  *           enum: ['EASY', 'MEDIUM', 'HARD']
  *         category:
  *           type: string
- *           enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'DATES', 'SETS', 'MAPS', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS']
+ *           enum: ['FUNDAMENTALS', 'ARRAYS', 'OBJECTS', 'SETS', 'MAPS', 'DATES', 'REGEX', 'RECURSION', 'CLASSES', 'ERRORS', 'PROMISES']
  *         tests:
  *           type: array
  *           items:

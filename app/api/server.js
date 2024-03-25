@@ -2,22 +2,28 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerOptions from './src/swagger/swaggerConfig.js';
 import getUserRouter from "./src/routes/usersRoute.js";
 import getChallengeRouter from "./src/routes/challengesRoute.js";
 import getAuthRouter from "./src/routes/authRoute.js";
 import { setup } from "./dependencyInjectionConfig.js";
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerOptions from './src/swagger/swaggerConfig.js';
+import fs from 'fs'; 
+import path from 'path';
 
 
 dotenv.config({ path: "./config.env" });
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const customCss = fs.readFileSync(path.resolve('./src/swagger/swaggerCustomStyles.css'), 'utf8');
+var options = {
+  customCss: customCss
+};
 const specs = swaggerJsdoc(swaggerOptions);
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs, options));
 
 setup();
 
