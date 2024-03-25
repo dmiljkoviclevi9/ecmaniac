@@ -12,7 +12,15 @@ Challenges are categorized into:
 - Fundamentals
 - Arrays
 - Objects
-- Dates
 - Sets
+- Maps
+- Dates
+- RegEx
+- Recursion
+- Classes
+- Errors
+- Promises
 
-Clicking on any of these will open a random challenge from that category. Challenges also contain a set of test cases needed to pass for a success.
+Each challenge also has a difficulty which is either Easy, Medium or Hard.
+
+Clicking on any of the categories will open a random challenge from that category. Each challenge also contaisns a set of test cases(minimum one) needed to pass for a successful solution.
