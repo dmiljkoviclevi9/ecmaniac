@@ -11,7 +11,13 @@ const getUserRouter = () => {
 
 
     usersRouter.route('/verify')
-        .get(userController.verifyUser)
+        .post(userController.verifyUser)
+    
+    usersRouter.route('/resend-verification')
+        .post(userController.resendVerification)
+
+    // usersRouter.route('/reset-password')
+    //     .post(userController.resetPassword)
 
     usersRouter.route('/')
         .post(userController.createUser)

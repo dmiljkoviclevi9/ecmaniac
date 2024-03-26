@@ -1,7 +1,8 @@
-import emailTransporter from './emailConfig.js'; 
+import { createEmailTransporter } from './emailConfig.js'; 
 
 class EmailService {
   static async sendVerificationEmail(to, token) {
+    const transporter = createEmailTransporter();
     const verificationUrl = `http://yourfrontenddomain.com/verify?token=${token}`;
     const message = {
       from: '"ecmaniac" <no-reply@example.com>',
@@ -10,7 +11,7 @@ class EmailService {
       html: `Please click the following link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a>`
     };
 
-    await emailTransporter.sendMail(message);
+    await transporter.sendMail(message);
   }
 }
 

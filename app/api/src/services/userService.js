@@ -67,4 +67,12 @@ export default class UserService {
     
         return await this.userRepository.markUserAsVerified(user._id);
     };
+
+    resendVerification = async (user) => {
+        try {
+            return await this.userRepository.resendVerification(user);
+        } catch (err) {
+            throw err;
+        }
+    };
 }

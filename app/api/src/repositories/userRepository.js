@@ -157,6 +157,44 @@ export default class UserRepository {
             throw err;
         }
     };
+    
+    markUserAsVerified = async (userId) => {
+        try {
+            const user = await User.findByIdAndUpdate(userId, {
+              $set: { isVerified: true },
+              $unset: { verificationToken: "", verificationTokenExpires: "" } // Clears the verification token and expiration
+            }, { new: true });
+    
+            return user;
+        } catch (error) {
+            console.error("Error marking user as verified:", error);
+            throw error;
+        }
+    };
+
+    resendVerification = async (user) => {
+        if (!user) {
+            const error = new Error("A valid user is required.");
+            error.statusCode = 400;
+            throw error;
+        }
+        try {
+            const existingUser = await this.findUserByEmail(user.email);
+            
+            if (!existingUser) {
+                const error = new Error("User not found");
+                error.statusCode = 404;
+                throw error;
+            }
+    
+            await existingUser.save();
+
+            return existingUser;
+        }
+        catch (error) {
+            throw err;
+        }
+    };
 
     getByCredentials = async (userReq) => {
         try {
@@ -198,19 +236,15 @@ export default class UserRepository {
             console.error('Error finding user by verification token:', err);
             throw err;
         }
-    };    
-
-    markUserAsVerified = async (userId) => {
-        try {
-            const user = await User.findByIdAndUpdate(userId, {
-              $set: { isVerified: true },
-              $unset: { verificationToken: "", verificationTokenExpires: "" } // Clears the verification token and expiration
-            }, { new: true });
+    };
     
-            return user;
-        } catch (error) {
-            console.error("Error marking user as verified:", error);
-            throw error;
+    findUserByEmail = async (email) => {
+        try {
+            const userFound = await User.findOne({ email });
+            return userFound;
+        } catch (err) {
+            console.error('Error finding user by email:', err);
+            throw err;
         }
     };
         

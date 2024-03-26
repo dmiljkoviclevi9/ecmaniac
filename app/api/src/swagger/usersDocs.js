@@ -2,7 +2,7 @@
 * @swagger
 * components:
 *  schemas:
-*    user:
+*    User:
 *      type: object
 *      required:
 *        - userName
@@ -21,20 +21,11 @@
 *        role:
 *          type: string
 *          description: The role assigned to the user. Must be one of 'USER', 'ADMIN'.
-*        tokens:
-*          type: array
-*          items:
-*            type: object
-*            properties:
-*              token:
-*                type: string
-*          description: The authentication tokens associated with the user.
 *  example:
 *    userName: johndoe
 *    email: johndoe@example.com
 *    password: password
 *    role: USER
-*    tokens: [{token: 'token'}]
 */
 
 
@@ -53,14 +44,12 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/user'
+ *             $ref: '#/components/schemas/User'
  *           example:
  *             userName: "Jane Doe"
  *             email: "jane.doe@example.mail"
  *             password: "Password1?"
  *             role: "USER"
- *             tokens: 
- *               - token: "string"
  *     responses:
  *       201:
  *         description: User created successfully.
@@ -117,7 +106,7 @@
 *       content:
 *         application/json:
 *           schema:
-*             $ref: '#/components/schemas/user'
+*             $ref: '#/components/schemas/User'
 *           examples:
 *             name change:
 *               value:
@@ -148,7 +137,7 @@
 *       content:
 *         application/json:
 *           schema:
-*             $ref: '#/components/schemas/user'
+*             $ref: '#/components/schemas/User'
 *     responses:
 *       200:
 *         description: User updated successfully.
@@ -199,7 +188,7 @@
 /**
  * @swagger
  * /user/verify:
- *   get:
+ *   post:
  *     summary: Verify a user's email address.
  *     tags: [Users]
  *     parameters:
@@ -215,4 +204,27 @@
  *       404:
  *         description: Verification failed. User not found or token is invalid.
  *     operationId: verifyUser
+ */
+/**
+ * @swagger
+ * /user/resend-verification:
+ *   post:
+ *    summary: Resend a verification email to the user.
+ *    tags: [Users]
+ *    requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *           example:
+ *             email: "jane.doe@example.mail"
+ *    responses:
+ *      200:
+ *        description: Verification email sent.
+ *      404:
+ *        description: User not found.
+ *      400:
+ *        description: User already verified.
+ *    operationId: resendVerification
  */
