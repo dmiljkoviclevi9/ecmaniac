@@ -13,9 +13,9 @@ const userSchema = new Schema({
     trim: true,
     validate: {
       validator: function (value) {
-        return validator.isLength(value, { min: 3, max: 16 });
+        return validator.isLength(value, { min: 3, max: 20 });
       },
-      message: "Username must be between 3 and 16 characters long.",
+      message: "Username must be between 3 and 20 characters long.",
     },
   },
   email: {
@@ -81,6 +81,8 @@ userSchema.methods.toJSON = function () {
 
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.verificationToken;
+  delete userObject.verificationTokenExpires;
 
   return userObject;
 };
