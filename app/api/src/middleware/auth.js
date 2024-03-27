@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 import User from "../models/userModel.js";
 
 // Middleware to check if a user is an admin
@@ -22,6 +21,11 @@ export const auth = async (req, res, next) => {
 
         if (!user) {
             throw new Error();
+        }
+
+        // Check if the user is verified
+        if (!user.isVerified) {
+            return res.status(403).send({ error: "User is not verified." });
         }
 
         req.token = token;
