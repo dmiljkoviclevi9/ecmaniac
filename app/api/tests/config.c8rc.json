@@ -1,0 +1,11 @@
+{
+    "all": true,
+    "include": ["src/"],
+    "exclude": [
+      "src/swagger/**"
+    ],
+    "clean": true,
+    "report-dir": "tests/coverage",
+    "reporter": ["html", "text"],
+    "check-coverage": true
+  }

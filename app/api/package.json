@@ -5,7 +5,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "c8 --config tests/config.c8rc.json mocha --config tests/config.mocharc.cjs",
     "start": "nodemon server.js"
   },
   "keywords": [],
@@ -26,6 +26,10 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "c8": "^9.1.0",
+    "chai": "^5.1.0",
+    "mocha": "^10.4.0",
+    "nodemon": "^3.1.0",
+    "sinon": "^17.0.1"
   }
 }
