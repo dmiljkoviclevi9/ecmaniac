@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 import ValidationError from "../errors/validationError.js";
-import EmailService from "../email/emailService.js";
 
 export default class UserController {
-  constructor({ userService }) {
+  constructor({ userService, emailService }) {
     this.userService = userService;
+    this.emailService = emailService;
   }
 
   createUser = async (req, res, next) => {
@@ -180,7 +180,7 @@ export default class UserController {
       // Generate and send verification email
       const verificationToken = user.generateVerificationToken();
       await user.save();
-      await EmailService.sendVerificationEmail(email, verificationToken);
+      await this.emailService.sendVerificationEmail(email, verificationToken);
   
       return res.status(200).json({ message: "Verification email sent!" });
     } catch (err) {

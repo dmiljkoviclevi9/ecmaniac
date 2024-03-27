@@ -7,6 +7,7 @@ import ChallengeController from "./src/controllers/challengeController.js";
 import ChallengeService from "./src/services/challengeService.js";
 import ChallengeRepository from "./src/repositories/challengeRepository.js";
 import AuthController from "./src/controllers/authController.js";
+import EmailService from "./src/email/emailService.js";
 
 export const container = awilix.createContainer({
   injectionMode: awilix.InjectionMode.PROXY,
@@ -21,6 +22,7 @@ export const setup = () => {
     challengeController: awilix.asClass(ChallengeController),
     challengeService: awilix.asClass(ChallengeService),
     challengeRepository: awilix.asClass(ChallengeRepository),
-    authController: awilix.asClass(AuthController)
+    authController: awilix.asClass(AuthController),
+    emailService: awilix.asClass(EmailService),
   });
 };
