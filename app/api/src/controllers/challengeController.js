@@ -60,10 +60,13 @@ export default class ChallengeController {
                 challenge: challenge,
             });
         } catch (err) {
-            if (err instanceof ValidationError) {
+            if (err.statusCode === 404) {
+                return res.status(404).json({ message: "Challenge not found" });
+            } else if (err instanceof ValidationError) {
                 return res.status(err.statusCode).json({ message: err.message });
+            } else {
+                next(err);
             }
-            next(err);
         }
     };
 
